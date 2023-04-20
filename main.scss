@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+$base-color: #337585;
+$primary-color: #ffbb7e;
+$secondary-color: #c05507;
+$accent-color: #384f5d;
+
+body {
+    background-color: #F0F0F0;
+    color: $accent-color;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+
+    .wrapper {
+
+        width: 100%;
+        border: 1px solid green;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            margin-top: 40px;
+        }
+
+        form {
+            // width: clamp(800px, 40%, 1200px);
+            width: calc(100% - 10px);
+            max-width: 1400px;
+            height: 200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 5px;
+            padding: 5px;
+            place-items: center;
+            margin: 20px 0px;
+
+            .form-group {
+
+                width: 100%;
+
+                input {
+                    background: transparent;
+                    border: 2px solid $accent-color;
+                    border-radius: 5px;
+                    color: $accent-color;
+                    font-family: 'Josefin Sans', sans-serif;
+                    margin: 0;
+                    padding: 1.5em;
+                    width: calc(100% - 3em);
+                }
+
+
+                select {
+
+                    font-family: 'Josefin Sans', sans-serif;
+                    border: 2px solid $accent-color;
+                    background: transparent;
+                    padding: 1.4em;
+                    border-radius: 5px;
+                    appearance: none;
+                    width: 100%;
+                    background: transparent;
+                    background-image: url("images/iconDown.png");
+                    background-repeat: no-repeat;
+                    background-position-x: 96%;
+                    background-position-y: 18px;
+                    background-size: 15px 15px;
+
+                    option {
+                        padding: 10px;
+                        margin: 10px;
+                    }
+                }
+
+            }
+
+            button {
+                font-family: 'Josefin Sans', sans-serif;
+                border: 2px solid $accent-color;
+                background: transparent;
+                padding: 1em;
+                border-radius: 5em;
+                width: 100%;
+                max-width: 1400px;
+                grid-column: 1 / span 3;
+                grid-row: 3;
+            }
+        }
+
+        // .container::after {
+        //     content: "";
+        //     flex: auto;
+        //   }
+
+        .container {
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 2000px;
+
+            &>div {
+                border: 2px solid $accent-color;
+                border-radius: 10px;
+                padding: 10px;
+                width: clamp(200px, 15vw, 600px);
+                margin: 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+
+                h2,
+                h3,
+                p {
+                    padding: 0px;
+                    margin: 0.5em
+                }
+
+
+
+                img {
+                    width: 10vw;
+                    align-self: center;
+                    padding: 2em;
+                }
+
+                button {
+                    font-family: 'Josefin Sans', sans-serif;
+                    border: 2px solid $accent-color;
+                    background: transparent;
+                    padding: 1em;
+                    border-radius: 5em;
+                    display: inline-block;
+                    margin: 10px 0px;
+                    width: 100%;
+                    margin-top: auto;
+                }
+
+            }
+        }
+
+
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    body {
+
+        .wrapper {
+
+            form {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                margin: 10px 0px;
+            }
+
+
+            button {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .container {
+
+                width: 100%;
+
+                div {
+
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+
+                }
+            }
+        }
+    }
+}

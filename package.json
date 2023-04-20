@@ -1,0 +1,17 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "main": "loginForm.js",
+  "repository": "https://github.com/telis-man/todo-list.git",
+  "author": "telis-man <nacevicius@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.8.3",
+    "prettier": "2.8.6",
+    "parcel": "^2.8.3"
+  },
+  "scripts": {
+    "dev": "parcel index.html main.html",
+    "build": "parcel build index.html"
+  }
+}

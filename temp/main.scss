@@ -1,0 +1,84 @@
+$base-color: #337585;
+$primary-color: #ffbb7e;
+$secondary-color: #c05507;
+$accent-color: #384f5d;
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $base-color;
+    color: $primary-color;
+    font-family: 'Arvo', serif;
+
+
+
+    .container {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+        .landing-cover {
+            background-image: url(images/landing-cover.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 600px;
+            width: 600px;
+            text-align: center;
+
+            p {
+                position: relative;
+                top: 40%;
+            }
+
+            .house {
+                background-image: url(images/Page.png);
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 174px;
+                width: 176px;
+                margin: 0;
+                position: relative;
+                left: 229px;
+                top: 143px;
+                transition: 0.3s ease-out;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.1) translate(0%, -7px);
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        .container {
+            .landing-cover {
+                height: 500px;
+                width: 350px;
+
+                h1 {
+                    font-size: 1.5em;
+                }
+
+                .house {
+                    height: 150px;
+                    width: 150px;
+                    left: 116px;
+                    top: 96px;
+                }
+            }
+        }
+    }
+}
