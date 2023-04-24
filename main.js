@@ -5,67 +5,11 @@ let urlImage = document.querySelector("#urlImage");
 let price = document.querySelector("#price");
 let date = document.querySelector("#date");
 let submitButton = document.querySelector("#submitButton");
-
-function deleteTask(title) {
-  let books = JSON.parse(localStorage.getItem("books"));
-
-  for (let book of books) {
-    if (book.title === title) {
-      books.splice(books.indexOf(book), 1);
-      localStorage.setItem("books", JSON.stringify(books));
-    } else {
-      console.log("Nerasta tarp local st");
-    }
-  }
-}
-
-function addBook(title, author, genre, urlImage, price, date) {
-  if (!localStorage.getItem("books")) {
-    let books = [];
-    localStorage.setItem("books", JSON.stringify(books));
-  }
-
-  let books = JSON.parse(localStorage.getItem("books"));
-
-  let bookObj = {
-    title: title,
-    author: author,
-    genre: genre,
-    urlImage: urlImage,
-    price: price,
-    date: date,
-  };
-
-  books.push(bookObj);
-  localStorage.setItem("books", JSON.stringify(books));
-}
-
-function findBook(title) {
-  let books = JSON.parse(localStorage.getItem("books"));
-
-  for (let book of books) {
-    if (book.title === title) return book;
-  }
-}
-function replaceBook(oldTitle, bookObj) {
-  let books = JSON.parse(localStorage.getItem("books"));
-
-  for (let book of books) {
-    if (book.title === oldTitle) {
-      book.title = bookObj.title;
-      book.author = bookObj.author;
-      book.urlImage = bookObj.urlImage;
-      book.genre = bookObj.genre;
-      book.price = bookObj.price;
-      book.date = bookObj.date;
-      console.log(book);
-
-      localStorage.setItem("books", JSON.stringify(books));
-    } else {
-      console.log("Nerasta tarp local st");
-    }
-  }
-}
+import { filterBySearch } from "./localStorageServices";
+import { deleteTask } from "./localStorageServices";
+import { addBook } from "./localStorageServices";
+import { findBook } from "./localStorageServices";
+import { replaceBook } from "./localStorageServices";
 
 function generateBookItem(title, author, imageUrl, genre, price, date) {
   let cardItem = document.createElement("div");
@@ -77,6 +21,7 @@ function generateBookItem(title, author, imageUrl, genre, price, date) {
   let genreItem = document.createElement("p");
   let editBookButton = document.createElement("button");
   editBookButton.textContent = "Edit book";
+  editBookButton.setAttribute("id", "editBookButton");
   let deleteBookButton = document.createElement("button");
   deleteBookButton.textContent = "Delete book";
 
@@ -96,6 +41,10 @@ function generateBookItem(title, author, imageUrl, genre, price, date) {
   priceItem.textContent = price + "€";
 
   editBookButton.addEventListener("click", () => {
+    if (document.querySelector("#inputForm").classList.contains) {
+      document.querySelector("#inputForm").classList.toggle("dnone");
+    }
+
     let book = findBook(titleItem.textContent);
 
     inputTitle.value = book.title;
@@ -178,17 +127,146 @@ submitButton.addEventListener("click", () => {
   }
 });
 
+function clearContainerItems() {
+  const container = document.querySelector(".container");
+  while (container.firstChild) {
+    container.removeChild(container.lastChild);
+  }
+}
+
 window.addEventListener("load", () => {
+  let filterSelectItem = document.querySelector(".searchMeniu");
   let books = JSON.parse(localStorage.getItem("books"));
 
-  for (let book of books) {
-    generateBookItem(
-      book.title,
-      book.author,
-      book.urlImage,
-      book.genre,
-      book.price,
-      book.date
+  document.querySelector("#formToggle").addEventListener("click", () => {
+    document.querySelector("#inputForm").classList.toggle("dnone");
+  });
+
+  filterSelectItem.addEventListener("change", (event) => {
+    if (event.target.value == "Title") {
+      books.sort(function (a, b) {
+        let textA = a.title.toUpperCase();
+        let textB = b.title.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
+      clearContainerItems();
+      for (let book of books) {
+        generateBookItem(
+          book.title,
+          book.author,
+          book.urlImage,
+          book.genre,
+          book.price,
+          book.date
+        );
+      }
+    }
+
+    if (event.target.value == "Author") {
+      books.sort(function (a, b) {
+        let textA = a.author.toUpperCase();
+        let textB = b.author.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
+      clearContainerItems();
+      for (let book of books) {
+        generateBookItem(
+          book.title,
+          book.author,
+          book.urlImage,
+          book.genre,
+          book.price,
+          book.date
+        );
+      }
+    }
+
+    if (event.target.value == "Genre") {
+      books.sort(function (a, b) {
+        let textA = a.genre.toUpperCase();
+        let textB = b.genre.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
+
+      clearContainerItems();
+      for (let book of books) {
+        generateBookItem(
+          book.title,
+          book.author,
+          book.urlImage,
+          book.genre,
+          book.price,
+          book.date
+        );
+      }
+    }
+    if (event.target.value == "Date") {
+      books.sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
+
+      clearContainerItems();
+      for (let book of books) {
+        generateBookItem(
+          book.title,
+          book.author,
+          book.urlImage,
+          book.genre,
+          book.price,
+          book.date
+        );
+      }
+    }
+    if (event.target.value == "Price") {
+      books.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+
+      clearContainerItems();
+      for (let book of books) {
+        generateBookItem(
+          book.title,
+          book.author,
+          book.urlImage,
+          book.genre,
+          book.price,
+          book.date
+        );
+      }
+    }
+  });
+
+  document.querySelector("#mainSearch").addEventListener("input", (event) => {
+    clearContainerItems();
+
+    let filteredObj = filterBySearch(
+      event.target.value,
+      JSON.parse(localStorage.getItem("books"))
     );
+
+    console.log(filteredObj);
+
+    for (let book of filteredObj) {
+      generateBookItem(
+        book.title,
+        book.author,
+        book.urlImage,
+        book.genre,
+        book.price,
+        book.date
+      );
+    }
+  });
+
+  if (!localStorage.getItem("books")) {
+    let books = [];
+    localStorage.setItem("books", JSON.stringify(books));
+  } else {
+    for (let book of books) {
+      generateBookItem(
+        book.title,
+        book.author,
+        book.urlImage,
+        book.genre,
+        book.price,
+        book.date
+      );
+    }
   }
 });

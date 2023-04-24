@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="main.scss" />
-    <script defer src="main.js"></script>
+    <script defer type="module" src="main.js"></script>
   </head>
 
   <body>
@@ -14,7 +14,10 @@
     viršelio vaizdo URL) -->
     <div class="wrapper">
       <h1>YOUR HOUSE OF BOOKS</h1>
-      <form id="inputForm" action="">
+
+      <button id="formToggle">Add new book</button>
+
+      <form id="inputForm" class="dnone" action="">
         <div class="form-group">
           <input id="title" placeholder="Title" type="text" />
         </div>
@@ -47,7 +50,17 @@
 
         <button id="submitButton" type="button">Add Book</button>
       </form>
-
+      <div class="searchMeniu">
+        <input type="text" id="mainSearch" placeholder="Search for book" />
+        <select id="filtersSelect" name="filtersSelect" id="filtersSelect">
+          <option value="0" selected disabled>Sort by</option>
+          <option value="Title">Title</option>
+          <option value="Author">Author</option>
+          <option value="Genre">Genre</option>
+          <option value="Price">Price</option>
+          <option value="Date">Date</option>
+        </select>
+      </div>
       <div class="container"></div>
     </div>
   </body>

@@ -13,8 +13,19 @@ body {
 
     .wrapper {
 
+        button {
+            font-family: 'Josefin Sans', sans-serif;
+            border: 2px solid $accent-color;
+            background: transparent;
+            padding: 1em;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 15px 0px;
+
+        }
+
         width: 100%;
-        border: 1px solid green;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -22,11 +33,12 @@ body {
 
         h1 {
             margin-top: 40px;
+            text-align: center;
         }
 
         form {
             // width: clamp(800px, 40%, 1200px);
-            width: calc(100% - 10px);
+            width: 90%;
             max-width: 1400px;
             height: 200px;
             display: grid;
@@ -87,13 +99,58 @@ body {
                 max-width: 1400px;
                 grid-column: 1 / span 3;
                 grid-row: 3;
+                color: #F0F0F0;
+                background-color: $accent-color;
+
+                &:hover {
+                    color: $accent-color;
+                    background-color: #ffbb7e;
+                }
             }
+        }
+
+        .dnone {
+            display: none;
         }
 
         // .container::after {
         //     content: "";
         //     flex: auto;
         //   }
+        .searchMeniu {
+            display: flex;
+
+            input {
+                background: transparent;
+                border: 2px solid $accent-color;
+                border-radius: 5px;
+                color: $accent-color;
+                font-family: 'Josefin Sans', sans-serif;
+                margin: 0;
+                padding: 1.5em;
+                width: clamp(200px, 40vw, 1400px);
+                margin: 10px;
+            }
+
+            select {
+
+                font-family: 'Josefin Sans', sans-serif;
+                border: 2px solid $accent-color;
+                background: transparent;
+                padding: 1.4em;
+                border-radius: 5px;
+                appearance: none;
+                width: 30%;
+                background: transparent;
+                background-image: url("images/iconDown.png");
+                background-repeat: no-repeat;
+                background-position-x: 96%;
+                background-position-y: 18px;
+                background-size: 15px 15px;
+                margin-left: 5px;
+                margin: 10px;
+            }
+        }
 
         .container {
 
@@ -120,8 +177,6 @@ body {
                     margin: 0.5em
                 }
 
-
-
                 img {
                     width: 10vw;
                     align-self: center;
@@ -137,6 +192,9 @@ body {
                     display: inline-block;
                     margin: 10px 0px;
                     width: 100%;
+                }
+
+                #editBookButton {
                     margin-top: auto;
                 }
 
@@ -152,6 +210,20 @@ body {
     body {
 
         .wrapper {
+
+            .searchMeniu {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+
+                select {
+                    width: 60%;
+                }
+
+                input {
+                    width: 75%;
+                }
+            }
 
             form {
                 display: flex;
